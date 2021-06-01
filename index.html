@@ -1,195 +1,239 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Parcial</title>
-    <meta name="description" content="A-Frame Environment Component">
-    <meta name="author" content="Diego F. Goberna">
-    <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@e8b592a76e2bfb88a6a7c12afd82a71c040ebaad/dist/aframe-master.min.js"></script>
-    <script src="dist/aframe-environment-component.min.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Voces" rel="stylesheet">
-   
 
-    <style>
-      h1 {
-        position: absolute;
-        z-index: 7000;
-        bottom: 30px;
-        left: 40%;
-        left: calc( 50% - 160px );
-        margin: 0;
-        font: 28px 'Voces', sans-serif;
-        color: #000;
-      }
-      h1 b{
-        color: white;
-        text-shadow: 1px 2px 0px black;
-        width: 300px;
-        display: inline-block;
-        text-align: center;
-      }
-      #about {
-        display: none;
-        position: absolute;
-        z-index: 7001;
-        width: 300px;
-        top: 40px;
-        left: 40px;
-        font: 14px 'Voces', Arial, sans-serif;
-        color: white;
-        line-height: 1.3rem;
-        background: rgba(0,0,0,0.2);
-        padding: 1rem;
-        box-sizing: border-box;
-      }
-      #about b{
-          font-weight: bold;
-          font-family: monospace;
-      }
-      #about p:last-child{
-        margin: 0;
-      }
-      #about a{
-        font-size: 14px;
-        color: #000;
-        font-weight: bold;
-        text-decoration: none;
-        transition: border-bottom-width 0.1s;
-        display: inline-block;
-        background: rgba(255,255,255,0.4);
-        padding: 0 3px;
-      }
-      #about a:hover{
-        background: rgba(255,255,255,1);
-      }
-      h1 a{
-        color: white;
-        text-decoration: none;
-        text-shadow: 1px 2px 0px black;
-        font-size: 20px;
-      }
+<head>
+  <meta charset="utf-8">
+  <title>Parcial</title>
+  <meta name="description" content="A-Frame">
+  <meta name="author" content="Martin F Balbin">
+  <script
+    src="https://cdn.jsdelivr.net/gh/aframevr/aframe@e8b592a76e2bfb88a6a7c12afd82a71c040ebaad/dist/aframe-master.min.js"></script>
+  <script src="dist/aframe-environment-component.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Voces" rel="stylesheet">
 
-    @media (max-width: 400px), (max-height: 300px) {
+
+
+  <style>
+    h1 {
+      position: absolute;
+      z-index: 7000;
+      bottom: 30px;
+      left: 40%;
+      left: calc(50% - 160px);
+      margin: 0;
+      font: 28px 'Voces', sans-serif;
+      color: #000;
+    }
+
+    h1 b {
+      color: white;
+      text-shadow: 1px 2px 0px black;
+      width: 300px;
+      display: inline-block;
+      text-align: center;
+    }
+
+    #about {
+      display: none;
+      position: absolute;
+      z-index: 7001;
+      width: 300px;
+      top: 40px;
+      left: 40px;
+      font: 14px 'Voces', Arial, sans-serif;
+      color: white;
+      line-height: 1.3rem;
+      background: rgba(0, 0, 0, 0.2);
+      padding: 1rem;
+      box-sizing: border-box;
+    }
+
+    #about b {
+      font-weight: bold;
+      font-family: monospace;
+    }
+
+    #about p:last-child {
+      margin: 0;
+    }
+
+    #about a {
+      font-size: 14px;
+      color: #000;
+      font-weight: bold;
+      text-decoration: none;
+      transition: border-bottom-width 0.1s;
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.4);
+      padding: 0 3px;
+    }
+
+    #about a:hover {
+      background: rgba(255, 255, 255, 1);
+    }
+
+    h1 a {
+      color: white;
+      text-decoration: none;
+      text-shadow: 1px 2px 0px black;
+      font-size: 20px;
+    }
+
+    @media (max-width: 400px),
+    (max-height: 300px) {
       #about {
         left: 5%;
         top: 5%;
         width: 90%;
       }
+
       h1 {
         left: 5%;
       }
+
       h1 b {
         width: auto;
       }
     }
-    </style>
+  </style>
 
-  </head>
-  <body>
-    <div id="about">
-        <p>Martin Balbin</p>
-    </div>
-      <script>
-      AFRAME.registerComponent('overlay-visibility', {
-        init: function () {
-          if (!this.el.isMobile) {
-            document.querySelector('#about').style.display = 'block';
-          }
+</head>
+
+<body>
+  <div id="about">
+    <p>Martin Balbin</p>
+  </div>
+  <script>
+    AFRAME.registerComponent('overlay-visibility', {
+      init: function () {
+        if (!this.el.isMobile) {
+          document.querySelector('#about').style.display = 'block';
         }
-      });
+      }
+    });
 
-      AFRAME.registerComponent('preset-switcher', {
-        init: function () {
-          var el = this.el;
-          var presets = ['forest', 'default', 'contact', 'egypt', 'checkerboard', 'goaland', 'yavapai', 'goldmine', 'threetowers', 'poison', 'arches', 'tron', 'japan', 'dream', 'volcano', 'starry', 'osiris'];
-          var preset = 0;
+    AFRAME.registerComponent('preset-switcher', {
+      init: function () {
+        var el = this.el;
+        var presets = ['forest', 'default', 'contact', 'egypt', 'checkerboard', 'goaland', 'yavapai', 'goldmine', 'threetowers', 'poison', 'arches', 'tron', 'japan', 'dream', 'volcano', 'starry', 'osiris'];
+        var preset = 0;
 
-          window.addEventListener('keydown', function (evt) {
-            if (evt.keyCode == 32) {
-              nextPreset(1);
-            }
-          });
-
-          document.querySelector('.previousPreset').addEventListener('click', function () {
-            nextPreset(-1);
-          });
-
-          document.querySelector('.nextPreset').addEventListener('click', function () {
+        window.addEventListener('keydown', function (evt) {
+          if (evt.keyCode == 32) {
             nextPreset(1);
-          });
+          }
+        });
 
-          function nextPreset(dir) {
-            if (preset === 0 && dir === -1) {
-              preset = presets.length - 1;
-            }
-            else {
-              preset = (preset + dir) % presets.length;
-            }
-            document.querySelector('h1 b').innerHTML = presets[preset];
-            el.setAttribute('environment', {preset: presets[preset]});
-          };
-        }
-      });
-    </script>
+        document.querySelector('.previousPreset').addEventListener('click', function () {
+          nextPreset(-1);
+        });
 
-    <a-scene overlay-visibility >
-          <a-assets>
+        document.querySelector('.nextPreset').addEventListener('click', function () {
+          nextPreset(1);
+        });
+
+        function nextPreset(dir) {
+          if (preset === 0 && dir === -1) {
+            preset = presets.length - 1;
+          }
+          else {
+            preset = (preset + dir) % presets.length;
+          }
+          document.querySelector('h1 b').innerHTML = presets[preset];
+          el.setAttribute('environment', { preset: presets[preset] });
+        };
+      }
+    });
+  </script>
+
+  <a-scene overlay-visibility>
+    <a-assets>
+      <a-asset-item id="tree" src="./assets/modelo.gltf"></a-asset-item>
+      <a-asset-item id="oso" src="./assets/oso.gltf"></a-asset-item>
+      <a-asset-item id="tigre" src="./assets/tigre.gltf"></a-asset-item>
+      <a-asset-item id="lobo" response-type="arraybuffer" src="./assets/scene.gltf"></a-asset-item>
+      <a-asset-item id="perro" response-type="arraybuffer" src="./assets/perro.gltf"></a-asset-item>
+      <a-asset-item id="pajaro" response-type="arraybuffer" src="./assets/pajaro.gltf"></a-asset-item>
+
+    </a-assets>
+
+    <a-text font="mozillavr" position="0 1.6 -2" value="Bienvenido al mundo de Martin" color="white" align="center ">
+
+      <a-animation attribute="rotation" dur="1000" fill="forwards" to="0 360 0" repeat="indefinite"></a-animation>
+    </a-text>
 
 
-            <a-asset-item id="tree" src="./assets/modelo.gltf"></a-asset-item>
-          </a-assets>
-        
-      <a-text font="mozillavr" position="0 1.6 -2" value="Bienvenido al mundo de Martin" color="white" align="center ">
-        
-        <a-animation attribute="rotation"
-                 dur="1000"
-                 fill="forwards"
-                 to="0 360 0"
-                 repeat="indefinite"></a-animation>
-        </a-text>
+    <a-text font="mozillavr" position="0 1.6 -w10" value="Encuentra los colores por el mapa" color="white"
+      align="center">
+      <a-animation attribute="rotation" dur="1000" fill="forwards" to="0 360 0" repeat="indefinite"></a-animation>
+
+    </a-text>
+    <a-text font="mozillavr" position="-10 1.6 -30" value="Felicidades, encontraste el color rojo" color="red"
+      align="center">
+      <a-animation attribute="rotation" dur="1000" fill="forwards" to="0 360 0" repeat="indefinite"></a-animation>
+    </a-text>
+
+    <a-obj-model gltf-model="#oso" position="-1 1 -10" rotation="280 4 10" scale="0.1 0.1 0.1"
+      material="src:./assets/oso.jpg; roughness:1; metalness:0"> </a-obj-model>
+
+    <a-obj-model gltf-model="#tigre" position="-10 0 -10" rotation="0 4 0" scale="1 1 1"
+      > </a-obj-model>
+
+    <a-obj-model gltf-model="#lobo" position="-10 1 -15" rotation="0 4 0" scale="2 2 2"
+     animation-mixer="clip:01_Run"> </a-obj-model>
+
+    <a-obj-model gltf-model="#lobo" position="-18 1 -15" rotation="0 4 0" scale="2 2 2"
+      animation-mixer="clip:04_Idle"> </a-obj-model>
+    
+      <a-obj-model gltf-model="#lobo"  position="-21 1 -15" rotation="0 180 0" scale="2 2 2"
+      animation-mixer="clip:04_Idle"> </a-obj-model>
+
+      <a-obj-model gltf-model="#perro" position="-1 1 -2" rotation="0 0 0" scale="1 1 1"
+     > </a-obj-model>
+
+    
 
 
-      <a-text font="mozillavr" position="0 1.6 -w10" value="Encuentra los colores por el mapa" color="white" align="center"> 
-        <a-animation attribute="rotation"
-        dur="1000"
-        fill="forwards"
-        to="0 360 0"
-        repeat="indefinite"></a-animation>
-      
-      </a-text>
-          <a-text font="mozillavr" position="-10 1.6 -30" value="Felicidades, encontraste el color rojo" color="red" align="center"> 
-            <a-animation attribute="rotation"
-            dur="1000"
-            fill="forwards"
-            to="0 360 0"
-            repeat="indefinite"></a-animation>
-          </a-text>
 
-      <a-entity gltf-model="#tree" position="-10 0.5 -30" rotation="0 45 0"> </a-entity>
+      <a-obj-model gltf-model="#pajaro" position="1 8 -20" rotation="0 180 0" scale="0.008 0.008 0.008"
+      animation-mixer="clip:Take 001"> </a-obj-model>
 
-      <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
-      <a-box position="-1 0.5 -10" rotation="0 45 0" color="#4CS2D9"></a-box>
-      <a-box position="-10 0.5 -30" rotation="0 45 0" color="#FF0000"></a-box>
+      <a-obj-model gltf-model="#pajaro" position="10 8 -40" rotation="0 100 0" scale="0.008 0.008 0.008"
+      animation-mixer="clip:Take 001"> </a-obj-model>
+      <a-obj-model gltf-model="#pajaro" position="20 8 -29" rotation="0 130 0" scale="0.008 0.008 0.008"
+      animation-mixer="clip:Take 001"> </a-obj-model>
+      <a-obj-model gltf-model="#pajaro" position="30 7 -30" rotation="0 0 0" scale="0.008 0.008 0.008"
+      animation-mixer="clip:Take 001"> </a-obj-model>
 
-      <a-entity environment="preset: forest" preset-switcher id="environment"></a-entity>
 
-    </a-scene>
+    <a-box position="-1 0.5 -30" rotation="0 45 0" color="#4CC3D9"></a-box>
+    <a-box position="-1 0.5 -10" rotation="0 45 0" color="#4CS2D9"></a-box>
+    <a-box position="-10 0.5 -30" rotation="0 45 0" color="#FF0000"></a-box>
+
+    <a-entity environment="preset: forest" preset-switcher id="environment"></a-entity>
+
+  </a-scene>
 
 
   <script>
+
+
     // google analytics
+
     var _gaq = [['_setAccount', 'UA-5753152-1'], ['_trackPageview']];
-    (function(d, t) {
+    (function (d, t) {
       var g = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
+        s = d.getElementsByTagName(t)[0];
       g.src = '//www.google-analytics.com/ga.js';
       s.parentNode.insertBefore(g, s);
     }(document, 'script'));
 
-</script>
+  </script>
 
-<!-- GitHub Corner. -->
-   
-<!-- End GitHub Corner. -->
-  </body>
+  <!-- GitHub Corner. -->
+
+  <!-- End GitHub Corner. -->
+</body>
+
 </html>
