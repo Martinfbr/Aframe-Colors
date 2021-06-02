@@ -11,36 +11,19 @@
   <script src="dist/aframe-environment-component.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Voces" rel="stylesheet">
-
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+  <script src="menu.js"></script>
+  <script src="button.js"></script>
 
 
   <style>
-    h1 {
-      position: absolute;
-      z-index: 7000;
-      bottom: 30px;
-      left: 40%;
-      left: calc(50% - 160px);
-      margin: 0;
-      font: 28px 'Voces', sans-serif;
-      color: #000;
-    }
-
-    h1 b {
-      color: white;
-      text-shadow: 1px 2px 0px black;
-      width: 300px;
-      display: inline-block;
-      text-align: center;
-    }
-
     #about {
       display: none;
       position: absolute;
       z-index: 7001;
-      width: 300px;
+      width: 130px;
       top: 40px;
-      left: 40px;
+      left: 20px;
       font: 14px 'Voces', Arial, sans-serif;
       color: white;
       line-height: 1.3rem;
@@ -69,32 +52,8 @@
       padding: 0 3px;
     }
 
-    #about a:hover {
-      background: rgba(255, 255, 255, 1);
-    }
-
-    h1 a {
-      color: white;
-      text-decoration: none;
-      text-shadow: 1px 2px 0px black;
-      font-size: 20px;
-    }
-
-    @media (max-width: 400px),
-    (max-height: 300px) {
-      #about {
-        left: 5%;
-        top: 5%;
-        width: 90%;
-      }
-
-      h1 {
-        left: 5%;
-      }
-
-      h1 b {
-        width: auto;
-      }
+    #about p:hover {
+      color: rgb(245, 0, 0);
     }
   </style>
 
@@ -148,95 +107,52 @@
   </script>
 
   <a-scene overlay-visibility>
-    <a-assets>
-      <a-asset-item id="tree" src="./assets/modelo.gltf"></a-asset-item>
-      <a-asset-item id="oso" src="./assets/oso.gltf"></a-asset-item>
-      <a-asset-item id="tigre" src="./assets/tigre.gltf"></a-asset-item>
-      <a-asset-item id="lobo" response-type="arraybuffer" src="./assets/scene.gltf"></a-asset-item>
-      <a-asset-item id="perro" response-type="arraybuffer" src="./assets/perro.gltf"></a-asset-item>
-      <a-asset-item id="pajaro" response-type="arraybuffer" src="./assets/pajaro.gltf"></a-asset-item>
 
-    </a-assets>
+    <a-entity id="menu" menu position="0 1.5 -0.5" rotation="-45 0 0" event-manager>
 
-    <a-text font="mozillavr" position="0 1.6 -2" value="Bienvenido al mundo de Martin" color="white" align="center ">
+      <a-entity id="animalesButton" button="label: Animales" position="-0.15 0 0"></a-entity>
+      <a-entity id="coloresButton" button="label: Colores" position="0.15 0 0"></a-entity>
+    </a-entity>
+
+    <a-camera>
+      <a-cursor color="white" position="-0.002 0.016 -0.302"> </a-cursor>
+    </a-camera>
+
+
+    <a-text font="mozillavr" position="0 2.5 -2" value="Bienvenido al mundo de Martin" color="white" align="center ">
 
       <a-animation attribute="rotation" dur="1000" fill="forwards" to="0 360 0" repeat="indefinite"></a-animation>
     </a-text>
-
+    <a-text font="mozillavr" position="0 2 -2" value="Puedes escoger alguno de los 2 mundos" color="white"
+      align="center "></a-text>
 
     <a-text font="mozillavr" position="0 1.6 -w10" value="Encuentra los colores por el mapa" color="white"
       align="center">
       <a-animation attribute="rotation" dur="1000" fill="forwards" to="0 360 0" repeat="indefinite"></a-animation>
 
     </a-text>
-    <a-text font="mozillavr" position="-10 1.6 -30" value="Felicidades, encontraste el color rojo" color="red"
-      align="center">
-      <a-animation attribute="rotation" dur="1000" fill="forwards" to="0 360 0" repeat="indefinite"></a-animation>
-    </a-text>
 
-    <a-obj-model gltf-model="#oso" position="-1 1 -10" rotation="280 4 10" scale="0.1 0.1 0.1"
-      material="src:./assets/oso.jpg; roughness:1; metalness:0"> </a-obj-model>
-
-    <a-obj-model gltf-model="#tigre" position="-10 0 -10" rotation="0 4 0" scale="1 1 1"
-      > </a-obj-model>
-
-    <a-obj-model gltf-model="#lobo" position="-10 1 -15" rotation="0 4 0" scale="2 2 2"
-     animation-mixer="clip:01_Run"> </a-obj-model>
-
-    <a-obj-model gltf-model="#lobo" position="-18 1 -15" rotation="0 4 0" scale="2 2 2"
-      animation-mixer="clip:04_Idle"> </a-obj-model>
-    
-      <a-obj-model gltf-model="#lobo"  position="-21 1 -15" rotation="0 180 0" scale="2 2 2"
-      animation-mixer="clip:04_Idle"> </a-obj-model>
-
-      <a-obj-model gltf-model="#perro" position="-1 1 -2" rotation="0 0 0" scale="1 1 1"
-     > </a-obj-model>
-
-    
-
-
-
-      <a-obj-model gltf-model="#pajaro" position="1 8 -20" rotation="0 180 0" scale="0.008 0.008 0.008"
-      animation-mixer="clip:Take 001"> </a-obj-model>
-
-      <a-obj-model gltf-model="#pajaro" position="10 8 -40" rotation="0 100 0" scale="0.008 0.008 0.008"
-      animation-mixer="clip:Take 001"> </a-obj-model>
-      <a-obj-model gltf-model="#pajaro" position="20 8 -29" rotation="0 130 0" scale="0.008 0.008 0.008"
-      animation-mixer="clip:Take 001"> </a-obj-model>
-      <a-obj-model gltf-model="#pajaro" position="30 7 -30" rotation="0 0 0" scale="0.008 0.008 0.008"
-      animation-mixer="clip:Take 001"> </a-obj-model>
-
-
-    <a-box position="-1 0.5 -30" rotation="0 45 0" color="#4CC3D9">
-      <a-animation attribute="rotation" repeat="indefinite" from="0 0 0" to="0 90 0"></a-animation>
-    </a-box>
-    
-    <a-box position="-1 0.5 -10" rotation="0 45 0" color="#4CS2D9"></a-box>
-    <a-box position="-10 0.5 -30" rotation="0 45 0" color="#FF0000"></a-box>
-
-    <a-entity environment="preset: forest" preset-switcher id="environment"></a-entity>
-
+    <a-entity environment="preset: goaland" preset-switcher id="environment"></a-entity>
   </a-scene>
 
 
   <script>
 
+    document
+      .querySelector("#animalesButton")
+      .addEventListener('click', function () {
+        location.href = "/animales.html";
+      });
 
-    // google analytics
-
-    var _gaq = [['_setAccount', 'UA-5753152-1'], ['_trackPageview']];
-    (function (d, t) {
-      var g = d.createElement(t),
-        s = d.getElementsByTagName(t)[0];
-      g.src = '//www.google-analytics.com/ga.js';
-      s.parentNode.insertBefore(g, s);
-    }(document, 'script'));
+    document
+      .querySelector("#coloresButton")
+      .addEventListener('click', function () {
+        location.href = "/colores.html";
+      });
 
   </script>
 
-  <!-- GitHub Corner. -->
 
-  <!-- End GitHub Corner. -->
 </body>
 
 </html>

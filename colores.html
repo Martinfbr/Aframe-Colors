@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Parcial</title>
+    <meta name="description" content="A-Frame">
+    <meta name="author" content="Martin F Balbin">
+    <script
+        src="https://cdn.jsdelivr.net/gh/aframevr/aframe@e8b592a76e2bfb88a6a7c12afd82a71c040ebaad/dist/aframe-master.min.js"></script>
+    <script src="dist/aframe-environment-component.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Voces" rel="stylesheet">
+    <script src="menu.js"></script>
+    <script src="button.js"></script>
+
+
+    <style>
+        h1 {
+            position: absolute;
+            z-index: 7000;
+            bottom: 30px;
+            left: 40%;
+            left: calc(50% - 160px);
+            margin: 0;
+            font: 28px 'Voces', sans-serif;
+            color: #000;
+        }
+
+        h1 b {
+            color: white;
+            text-shadow: 1px 2px 0px black;
+            width: 300px;
+            display: inline-block;
+            text-align: center;
+        }
+
+        #about {
+            display: none;
+            position: absolute;
+            z-index: 7001;
+            width: 300px;
+            top: 40px;
+            left: 40px;
+            font: 14px 'Voces', Arial, sans-serif;
+            color: white;
+            line-height: 1.3rem;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1rem;
+            box-sizing: border-box;
+        }
+
+        #about b {
+            font-weight: bold;
+            font-family: monospace;
+        }
+
+        #about p:last-child {
+            margin: 0;
+        }
+
+        #about a {
+            font-size: 14px;
+            color: #000;
+            font-weight: bold;
+            text-decoration: none;
+            transition: border-bottom-width 0.1s;
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.4);
+            padding: 0 3px;
+        }
+
+        #about a:hover {
+            background: rgba(255, 255, 255, 1);
+        }
+
+        h1 a {
+            color: white;
+            text-decoration: none;
+            text-shadow: 1px 2px 0px black;
+            font-size: 20px;
+        }
+
+        @media (max-width: 400px),
+        (max-height: 300px) {
+            #about {
+                left: 5%;
+                top: 5%;
+                width: 90%;
+            }
+
+            h1 {
+                left: 5%;
+            }
+
+            h1 b {
+                width: auto;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="about">
+
+        <p> Entraste al mundo de los colores
+            Tienes que encontrar: <br>
+            -Cubo de color Rojo<br>
+            -Cubo de color Azul<br>
+            -Cubo de color Blanco<br>
+            -Cubo de color Verde
+
+        </p>
+    </div>
+    <script>
+        AFRAME.registerComponent('overlay-visibility', {
+            init: function () {
+                if (!this.el.isMobile) {
+                    document.querySelector('#about').style.display = 'block';
+                }
+            }
+        });
+
+        AFRAME.registerComponent('preset-switcher', {
+            init: function () {
+                var el = this.el;
+                var presets = ['forest', 'default', 'contact', 'egypt', 'checkerboard', 'goaland', 'yavapai', 'goldmine', 'threetowers', 'poison', 'arches', 'tron', 'japan', 'dream', 'volcano', 'starry', 'osiris'];
+                var preset = 0;
+
+                window.addEventListener('keydown', function (evt) {
+                    if (evt.keyCode == 32) {
+                        nextPreset(1);
+                    }
+                });
+
+                document.querySelector('.previousPreset').addEventListener('click', function () {
+                    nextPreset(-1);
+                });
+
+                document.querySelector('.nextPreset').addEventListener('click', function () {
+                    nextPreset(1);
+                });
+
+                function nextPreset(dir) {
+                    if (preset === 0 && dir === -1) {
+                        preset = presets.length - 1;
+                    }
+                    else {
+                        preset = (preset + dir) % presets.length;
+                    }
+                    document.querySelector('h1 b').innerHTML = presets[preset];
+                    el.setAttribute('environment', { preset: presets[preset] });
+                };
+            }
+        });
+    </script>
+
+    <a-scene overlay-visibility>
+
+
+
+
+        <a-box position="-1 0.5 -30" rotation="0 45 0" color="#4CC3D9">
+            <a-animation attribute="rotation" repeat="indefinite" from="0 0 0" to="0 90 0"></a-animation>
+        </a-box>
+
+        <a-box position="-1 0.5 -10" rotation="0 45 0" color="#4CS2D9"></a-box>
+        <a-box position="-10 0.5 -30" rotation="0 45 0" color="#AE00FF"></a-box>
+        <a-box position="-1 0.5 -50" rotation="0 45 0" color="#2ECC71"></a-box>
+        <a-box position="10 1.2 30" rotation="0 45 0" color="#FFDA00"></a-box>
+        <a-box position="40 0.5 -10" rotation="0 45 0" color="#FFFFFF"></a-box>
+        <a-box position="-30 1.2 -15" rotation="0 45 0" color="#FF0000"></a-box>
+        <a-box position="-15 1.2 -30" rotation="0 45 0" color="#FFDA00"></a-box>
+        <a-box position="-40 1.2 -10" rotation="0 45 0" color="#FFFFFF"></a-box>
+        <a-box position="-30 1.2 -15" rotation="0 45 0" color="#FF0000"></a-box>
+        <a-entity environment="preset: checkerboard" preset-switcher id="environment"></a-entity>
+
+
+    </a-scene>
+
+</body>
+
+</html>
